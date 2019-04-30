@@ -22,3 +22,6 @@ class QidianItem(Item):
     sub_name = Field()
 
     synoptic = Field()
+
+    platform = Field()
+    platform_src = Field()
