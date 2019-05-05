@@ -2,6 +2,7 @@
 import scrapy
 from scrapy.selector.unified import SelectorList
 
+
 class QiushibaikeSpider(scrapy.Spider):
     name = 'qiushibaike'
     allowed_domains = ['qiushibaike.com']
@@ -19,4 +20,5 @@ class QiushibaikeSpider(scrapy.Spider):
             content = duanzidiv.xpath('.//div[@class="content"]//text()').getall()
             content = " ".join(content).strip()
             self.log(content)
-        pass
+            duanzi = {'author': author, "content": content}
+            yield duanzi
