@@ -10,25 +10,25 @@ from qidian.items import QidianItem
 
 
 class BasicSpider(scrapy.Spider):
-    name = 'manual'
-    allowed_domains = ['vip.book.sina.com.cn']
+    name = 'qidian'
+    allowed_domains = ['www.qidian.com']
     start_urls = [
-        'http://vip.book.sina.com.cn/weibobook/cate.php?cate_id=1036&w=0&s=0&order=1&vt=4&page=1',
+        'https://www.qidian.com/all?orderId=&style=1&pageSize=20&siteid=1&pubflag=0&hiddenField=0&page=1',
     ]
 
     def parse(self, response):
-        item_selector = response.xpath('//a[@class="a-type-black"]/@href')
+        item_selector = response.xpath('//ul[@class="all-img-list cf"]//li//h4/a/@href')
         for url in item_selector.extract():
             self.log('urljoin 2 ==>: %s' % urljoin(response.url, url))
             yield Request(urljoin(response.url, url), callback=self.catalog_item)
 
-        next_selector = response.xpath('//*[@class="next"]/@href')
+        next_selector = response.xpath('//*[@class="lbf-pagination-next "]/@href')
         for url in next_selector.extract():
             self.log('urljoin==>: %s' % urljoin(response.url, url))
             yield Request(urljoin(response.url, url))
-
-        info = self.parse_item(response=response)
-        self.log('info : %s' % info)
+        #
+        # info = self.parse_item(response=response)
+        # self.log('info : %s' % info)
 
     def parse_item(self, response):
         """  This function parses a property page.
@@ -58,7 +58,9 @@ class BasicSpider(scrapy.Spider):
         return l.load_item()
 
     def catalog_item(self, response):
-        l = ItemLoader(item=QidianItem(), response=response)
-        l.add_xpath('title', '//div[@class="new_charpet"]/a/text()')
-        l.add_xpath('src', '//div[@class="new_charpet"]/a/@href')
-        return l.load_item()
+        next_selector = response.xpath('//ui[@class="cf"]//li/a/@href')
+        self.log(next_selector)
+        # for url in next_selector.extract():
+        #     self.log('urljoin 3==>: %s' % urljoin(response.url, url))
+            # yield Request(urljoin(response.url, url))
+        return next_selector
