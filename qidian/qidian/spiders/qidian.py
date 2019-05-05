@@ -62,5 +62,5 @@ class BasicSpider(scrapy.Spider):
         self.log(next_selector)
         # for url in next_selector.extract():
         #     self.log('urljoin 3==>: %s' % urljoin(response.url, url))
-            # yield Request(urljoin(response.url, url))
+        # yield Request(urljoin(response.url, url))
         return next_selector
