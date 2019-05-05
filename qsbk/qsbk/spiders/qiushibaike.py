@@ -2,8 +2,8 @@
 import scrapy
 
 
-class QsbkSpiderSpider(scrapy.Spider):
-    name = 'qsbk_spider'
+class QiushibaikeSpider(scrapy.Spider):
+    name = 'qiushibaike'
     allowed_domains = ['qiushibaike.com']
     start_urls = ['http://www.qiushibaike.com/']
 

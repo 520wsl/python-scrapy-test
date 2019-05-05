@@ -17,7 +17,7 @@ NEWSPIDER_MODULE = 'qsbk.spiders'
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 # USER_AGENT = 'qsbk (+http://www.yourdomain.com)'
 
-# Obey robots.txt rules  遵从爬虫机器人规则
+# Obey robots.txt rules
 ROBOTSTXT_OBEY = False
 
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
