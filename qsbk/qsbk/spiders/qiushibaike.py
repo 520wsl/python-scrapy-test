@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import scrapy
 from scrapy.selector.unified import SelectorList
+from items import QsbkItem
 
 
 class QiushibaikeSpider(scrapy.Spider):
@@ -10,15 +11,17 @@ class QiushibaikeSpider(scrapy.Spider):
 
     def parse(self, response):
         duanzidivs = response.xpath("//div[@id='content-left']/div")
-        self.log(type(duanzidivs))
+        self.log('duanzidivs Type: %s ' % type(duanzidivs))
         self.log(duanzidivs)
 
         for duanzidiv in duanzidivs:
-            self.log(type(duanzidiv))
+            self.log('duanzidiv Type: %s' % type(duanzidiv))
             author = duanzidiv.xpath('.//h2/text()').get().strip()
-            self.log(author)
+            self.log('author: %s' % author)
             content = duanzidiv.xpath('.//div[@class="content"]//text()').getall()
             content = " ".join(content).strip()
-            self.log(content)
-            duanzi = {'author': author, "content": content}
-            yield duanzi
+            self.log('content: %s' % content)
+            # duanzi = {'author': author, "content": content}
+
+            item = QsbkItem(author=author, content=content)
+            yield item
