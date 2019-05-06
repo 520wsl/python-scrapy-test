@@ -8,13 +8,10 @@
 from scrapy.exporters import JsonLinesItemExporter
 
 
-class QidianPipeline(object):
+class WxappPipeline(object):
     def __init__(self):
-        self.fp = open('qidian.json', 'wb')
+        self.fp = open('wxjc.json', 'wb')
         self.exporter = JsonLinesItemExporter(self.fp, ensure_ascii=False, encoding='utf-8')
-
-    def open_spider(self, spider):
-        print('爬虫开始。。。。。。。。。。。。')
 
     def process_item(self, item, spider):
         self.exporter.export_item(item=item)

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Scrapy settings for qidian project
+# Scrapy settings for wxapp project
 #
 # For simplicity, this file contains only settings considered important or
 # commonly used. You can find more settings consulting the documentation:
@@ -9,14 +9,14 @@
 #     https://doc.scrapy.org/en/latest/topics/downloader-middleware.html
 #     https://doc.scrapy.org/en/latest/topics/spider-middleware.html
 
-BOT_NAME = 'qidian'
+BOT_NAME = 'wxapp'
 
-SPIDER_MODULES = ['qidian.spiders']
-NEWSPIDER_MODULE = 'qidian.spiders'
+SPIDER_MODULES = ['wxapp.spiders']
+NEWSPIDER_MODULE = 'wxapp.spiders'
 
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
-#USER_AGENT = 'qidian (+http://www.yourdomain.com)'
+#USER_AGENT = 'wxapp (+http://www.yourdomain.com)'
 
 # Obey robots.txt rules
 ROBOTSTXT_OBEY = False
@@ -39,21 +39,22 @@ DOWNLOAD_DELAY = 1
 #TELNETCONSOLE_ENABLED = False
 
 # Override the default request headers:
-#DEFAULT_REQUEST_HEADERS = {
-#   'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
-#   'Accept-Language': 'en',
-#}
+DEFAULT_REQUEST_HEADERS = {
+  'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+  'Accept-Language': 'en',
+    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.108 Safari/537.36'
+}
 
 # Enable or disable spider middlewares
 # See https://doc.scrapy.org/en/latest/topics/spider-middleware.html
 #SPIDER_MIDDLEWARES = {
-#    'qidian.middlewares.QidianSpiderMiddleware': 543,
+#    'wxapp.middlewares.WxappSpiderMiddleware': 543,
 #}
 
 # Enable or disable downloader middlewares
 # See https://doc.scrapy.org/en/latest/topics/downloader-middleware.html
 #DOWNLOADER_MIDDLEWARES = {
-#    'qidian.middlewares.QidianDownloaderMiddleware': 543,
+#    'wxapp.middlewares.WxappDownloaderMiddleware': 543,
 #}
 
 # Enable or disable extensions
@@ -65,7 +66,7 @@ DOWNLOAD_DELAY = 1
 # Configure item pipelines
 # See https://doc.scrapy.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
-   'qidian.pipelines.QidianPipeline': 300,
+   'wxapp.pipelines.WxappPipeline': 300,
 }
 
 # Enable and configure the AutoThrottle extension (disabled by default)

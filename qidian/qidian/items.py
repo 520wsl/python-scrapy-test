@@ -9,19 +9,12 @@ from scrapy.item import Item, Field
 
 
 class QidianItem(Item):
-    # define the fields for your item here like:
-    # name = scrapy.Field()
     book_id = Field()
     src = Field()
     title = Field()
     img_url = Field()
     state = Field()
-
     author = Field()
     chan_name = Field()
     sub_name = Field()
-
     synoptic = Field()
-
-    platform = Field()
-    platform_src = Field()
