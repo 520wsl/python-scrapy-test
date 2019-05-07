@@ -14,3 +14,6 @@ class FnItem(scrapy.Item):
     src = scrapy.Field()
     title = scrapy.Field()
     id = scrapy.Field()
+
+    chan_name = scrapy.Field()
+    chan_id = scrapy.Field()
