@@ -16,7 +16,7 @@ class FengniaoSpider(scrapy.Spider):
         'https://tu.fengniao.com/',
     ]
     base_img_api = "https://tu.fengniao.com/ajax/ajaxTuPicList.php?page={0}&tagsId={1}&action=getPicLists"
-    max_page_num = 100
+    max_page_num = 200
 
     def parse(self, response):
         # self.log(response)
@@ -32,8 +32,9 @@ class FengniaoSpider(scrapy.Spider):
                 index = 1  # 起始页码设置为1
                 while True:
                     url = self.base_img_api.format(index, id)
-                    if index > 100:
-                        self.log('当前页码:[ %s ] - [ %s ] - [ %s ]  : 只抓取前 100 页数据 url : [ %s ]' % (title, id, index, url))
+                    if index > self.max_page_num:
+                        self.log('当前页码:[ %s ] - [ %s ] - [ %s ]  : 只抓取前 %s 页数据 url : [ %s ]' % (
+                            title, id, index, self.max_page_num, url))
                         break
                     # self.log(url)
                     index += 1
@@ -41,7 +42,6 @@ class FengniaoSpider(scrapy.Spider):
                         'title': title,
                         'id': id
                     }, callback=self.parse_item_img)
-                    time.sleep(3)
 
     def parse_item_img(self, response):
         meta = response.meta
