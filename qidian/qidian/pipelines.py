@@ -10,7 +10,7 @@ from scrapy.exporters import JsonLinesItemExporter
 
 class QidianPipeline(object):
     def __init__(self):
-        self.fp = open('qidian.json', 'wb')
+        self.fp = open('qidian_dev.json', 'wb')
         self.exporter = JsonLinesItemExporter(self.fp, ensure_ascii=False, encoding='utf-8')
 
     def open_spider(self, spider):

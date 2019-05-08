@@ -28,10 +28,10 @@ class FnPipeline(object):
 
     def process_item(self, item, spider):
         imgres = requests.get(item['src'])
-        if os.path.exists("./images/" + item['chan_name'] + '_' + item['chan_id']) == False:
-            os.makedirs("./images/" + item['chan_name'] + '_' + item['chan_id'])
+        if os.path.exists("./images_dev/" + item['chan_name'] + '_' + item['chan_id']) == False:
+            os.makedirs("./images_dev/" + item['chan_name'] + '_' + item['chan_id'])
 
-        with open("./images/" + item['chan_name'] + '_' + item['chan_id'] + '/' + item['title'] + '_' + item['id'] + '.jpg', 'wb') as f:
+        with open("./images_dev/" + item['chan_name'] + '_' + item['chan_id'] + '/' + item['title'] + '_' + item['id'] + '.jpg', 'wb') as f:
             f.write(imgres.content)
         return item
 
