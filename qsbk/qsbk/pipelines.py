@@ -47,7 +47,7 @@ from scrapy.exporters import JsonLinesItemExporter
 
 class QsbkPipeline(object):
     def __init__(self):
-        self.fp = open('dunzi.json', 'wb')
+        self.fp = open('dunzi_dev.json', 'wb')
         self.exporter = JsonLinesItemExporter(self.fp, ensure_ascii=False, encoding='utf-8')
 
     def open_spider(self, spider):

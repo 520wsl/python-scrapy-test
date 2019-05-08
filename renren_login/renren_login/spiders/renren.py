@@ -17,7 +17,7 @@ class RenrenSpider(scrapy.Spider):
         yield request
 
     def parse_page(self, response):
-        # with open('renren.html', 'w', encoding='utf-8') as fp:
+        # with open('renren_dev.html', 'w', encoding='utf-8') as fp:
         #     fp.write(response.text)
         request = scrapy.Request(
             url='http://www.renren.com/968562108/profile?v=info_timeline',
@@ -26,5 +26,5 @@ class RenrenSpider(scrapy.Spider):
         yield request
 
     def parse_profile(self, response):
-        with open('sp.html', 'w', encoding='utf-8') as fp:
+        with open('sp_dev.html', 'w', encoding='utf-8') as fp:
             fp.write(response.text)

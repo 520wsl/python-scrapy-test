@@ -12,7 +12,7 @@ from scrapy.exporters import JsonLinesItemExporter
 
 class FnPipeline(object):
     # def __init__(self):
-    #     self.fp = open('fengniao.txt', 'a', encoding='utf-8')
+    #     self.fp = open('fengniao_dev.txt', 'a', encoding='utf-8')
     #     self.exporter = JsonLinesItemExporter(self.fp, ensure_ascii=False, encoding='utf-8')
     #
     #
