@@ -18,10 +18,20 @@ class QiandianBookSpider(scrapy.Spider):
         bookId = input('请输入起点中文网 小说id：')
         path = self.book_info_path.format(int(bookId))
         self.log(path)
-        yield Request(url=path, meta={'bookId': bookId}, callback=self.parse_book)
+        yield Request(url=path, meta={'bookId': bookId}, callback=self.parse_book, errback=self.error_book)
+
+    def error_book(self, response):
+        self.log('没有找到书籍，请确认后重新尝试。')
+        yield Request(url=self.start_urls[0], callback=self.parse)
 
     def parse_book(self, response):
+        # self.log(response)
         name = response.xpath('//title/text()').get()
+
+        if name == '起点中文网_阅文集团旗下网站':
+            self.log('没有找到书籍，请确认后重新尝试。')
+            yield Request(url=self.start_urls[0], callback=self.parse)
+
         bookId = response.meta['bookId']
         path = self.catalog_path.format(int(bookId))
         yield Request(url=path, meta={'bookId': bookId, 'name': name}, callback=self.parse_item)
@@ -39,6 +49,7 @@ class QiandianBookSpider(scrapy.Spider):
             for vs in vss:
                 # self.log(vs)
                 vn = str(vnid) + '_' + vs['vN']
+                vnid += 1
                 vip = vs['vS']
                 for cs in vs['cs']:
                     bookId = bookId

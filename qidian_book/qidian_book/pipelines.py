@@ -24,10 +24,10 @@ class QidianBookPipeline(object):
         if not os.path.exists(book_path):
             os.mkdir(book_path)
 
-        vm_path = os.path.join(book_path, vn)
-        if not os.path.exists(vm_path):
-            os.mkdir(vm_path)
+        # vm_path = os.path.join(book_path, vn)
+        # if not os.path.exists(vm_path):
+        #     os.mkdir(vm_path)
 
-        with open(os.path.join(vm_path, cN + '.txt'), 'w', encoding='utf-8') as fp:
+        with open(os.path.join(book_path, cN + '.txt'), 'w', encoding='utf-8') as fp:
             fp.write(content)
         return item
