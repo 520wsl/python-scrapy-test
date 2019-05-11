@@ -53,7 +53,8 @@ DEFAULT_REQUEST_HEADERS = {
 # Enable or disable downloader middlewares
 # See https://doc.scrapy.org/en/latest/topics/downloader-middleware.html
 # DOWNLOADER_MIDDLEWARES = {
-#    'jianshu_paider.middlewares.JianshuPaiderDownloaderMiddleware': 543,
+#     'jianshu_paider.middlewares.UserAgentDownloadMiddleware': 543,
+#     'jianshu_paider.middlewares.IPProxyDownloadMiddleware': 100,
 # }
 
 # Enable or disable extensions
