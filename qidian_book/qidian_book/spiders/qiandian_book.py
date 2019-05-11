@@ -11,24 +11,35 @@ class QiandianBookSpider(scrapy.Spider):
     name = 'qiandian_book'
     allowed_domains = ['read.qidian.com', 'book.qidian.com']
     start_urls = ['https://read.qidian.com']
+    book_info_path = 'https://book.qidian.com/info/{0}'
     catalog_path = 'https://read.qidian.com/ajax/book/category?_csrfToken=&bookId={0}'
 
     def parse(self, response):
         bookId = input('请输入起点中文网 小说id：')
-        path = self.catalog_path.format(int(bookId))
+        path = self.book_info_path.format(int(bookId))
         self.log(path)
-        yield Request(url=path, meta={'bookId': bookId}, callback=self.parse_item)
+        yield Request(url=path, meta={'bookId': bookId}, callback=self.parse_book)
+
+    def parse_book(self, response):
+        name = response.xpath('//title/text()').get()
+        bookId = response.meta['bookId']
+        path = self.catalog_path.format(int(bookId))
+        yield Request(url=path, meta={'bookId': bookId, 'name': name}, callback=self.parse_item)
 
     def parse_item(self, response):
+        bookId = response.meta['bookId']
+        name = response.meta['name']
+        uuid = 1
+        vnid = 1
+
         apiData = json.loads(response.text)
         # self.log(apiData)
         if apiData['data']['vs']:
             vss = apiData['data']['vs']
             for vs in vss:
                 # self.log(vs)
-                vn = vs['vN']
+                vn = str(vnid) + '_' + vs['vN']
                 vip = vs['vS']
-                bookId = response.meta['bookId']
                 for cs in vs['cs']:
                     bookId = bookId
                     id = cs['id']
@@ -37,16 +48,17 @@ class QiandianBookSpider(scrapy.Spider):
                     else:
                         cU = urljoin(response.url, '/chapter/' + str(bookId) + '/' + str(id))
                         vn = vs['vN'] + '_VIP'
-                    cN = cs['cN']
-                    uuid = cs['uuid']
+                    cN = str(uuid) + '_' + cs['cN']
                     catalog = {
                         'vn': vn,
                         'id': id,
                         'cU': cU,
                         'cN': cN,
                         'uuid': uuid,
+                        'name': name,
                         'bookId': bookId
                     }
+                    uuid += 1
                     # self.log(catalog)
                     yield Request(url=catalog['cU'], meta=catalog, callback=self.catalog_txt)
 
@@ -56,4 +68,4 @@ class QiandianBookSpider(scrapy.Spider):
         catalog = response.meta
         # self.log(content)
         yield QidianBookItem(content=content, vn=catalog['vn'], id=catalog['id'], cU=response.url, cN=catalog['cN'],
-                             uuid=catalog['uuid'], bookId=catalog['bookId'])
+                             uuid=catalog['uuid'], bookId=catalog['bookId'], name=catalog['name'])

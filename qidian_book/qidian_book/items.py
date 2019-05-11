@@ -16,3 +16,4 @@ class QidianBookItem(scrapy.Item):
     uuid = scrapy.Field()
     content = scrapy.Field()
     bookId = scrapy.Field()
+    name = scrapy.Field()
