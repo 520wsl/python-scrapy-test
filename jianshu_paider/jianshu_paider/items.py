@@ -16,3 +16,8 @@ class JianshuPaiderItem(scrapy.Item):
     pub_time = scrapy.Field()
     author = scrapy.Field()
     avatar = scrapy.Field()
+
+    read_count = scrapy.Field()
+    like_count = scrapy.Field()
+    word_count = scrapy.Field()
+    subjects = scrapy.Field()
