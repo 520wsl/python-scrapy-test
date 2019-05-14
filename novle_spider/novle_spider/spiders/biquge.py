@@ -73,6 +73,7 @@ class BiqugeSpider(scrapy.Spider):
     def catalog_txt(self, response):
         content = response.xpath('//div[@id="content"]/text()').getall()
         content = "\n".join(content).strip()
+        content = content.replace('<br>', '').replace('\r', '')
         catalog = response.meta
         self.log(content)
         yield NovleSpiderItem(content=content, vn=catalog['vn'], catalogId=catalog['catalogId'], cU=response.url,
