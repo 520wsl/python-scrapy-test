@@ -64,9 +64,9 @@ DEFAULT_REQUEST_HEADERS = {
 
 # Configure item pipelines
 # See https://doc.scrapy.org/en/latest/topics/item-pipeline.html
-ITEM_PIPELINES = {
-   'fang.pipelines.FangPipeline': 300,
-}
+# ITEM_PIPELINES = {
+#     'fang.pipelines.FangPipeline': 300,
+# }
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://doc.scrapy.org/en/latest/topics/autothrottle.html
@@ -88,3 +88,22 @@ ITEM_PIPELINES = {
 # HTTPCACHE_DIR = 'httpcache'
 # HTTPCACHE_IGNORE_HTTP_CODES = []
 # HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
+
+# Scrapy -Redis 相关配置
+
+# 确保 request 存储到 redis中
+SCHEDULER = 'scrapy_redis.scheduler.Scheduler'
+
+# 确保所有爬虫共享相同的去重指纹
+DUPEFILTER_CLASS = 'scrapy_redis.dupefilter.RFPDupeFilter'
+
+# 设置 redis 为 item pipeline
+ITEM_PIPELINES = {
+    'scrapy_redis.pipelines.RedisPipeline': 300
+}
+# 在 redis 中 保持 scrapy-redis用到的队列，不会清理redis中的队列，从而可以实现暂停和恢复的功能
+SCHEDULER_PERSIST = True
+
+# 设置链接 redis 信息
+REDIS_HOST = '172.30.34.155'
+REDIS_PORT = '6379'
