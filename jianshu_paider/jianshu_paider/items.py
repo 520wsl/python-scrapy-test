@@ -20,4 +20,5 @@ class JianshuPaiderItem(scrapy.Item):
     read_count = scrapy.Field()
     like_count = scrapy.Field()
     word_count = scrapy.Field()
+    comments_count = scrapy.Field()
     subjects = scrapy.Field()

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Scrapy settings for jianshu_paider project
+# Scrapy settings for fang project
 #
 # For simplicity, this file contains only settings considered important or
 # commonly used. You can find more settings consulting the documentation:
@@ -9,13 +9,13 @@
 #     https://doc.scrapy.org/en/latest/topics/downloader-middleware.html
 #     https://doc.scrapy.org/en/latest/topics/spider-middleware.html
 
-BOT_NAME = 'jianshu_paider'
+BOT_NAME = 'fang'
 
-SPIDER_MODULES = ['jianshu_paider.spiders']
-NEWSPIDER_MODULE = 'jianshu_paider.spiders'
+SPIDER_MODULES = ['fang.spiders']
+NEWSPIDER_MODULE = 'fang.spiders'
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
-# USER_AGENT = 'jianshu_paider (+http://www.yourdomain.com)'
+# USER_AGENT = 'fang (+http://www.yourdomain.com)'
 
 # Obey robots.txt rules
 ROBOTSTXT_OBEY = False
@@ -47,14 +47,14 @@ DEFAULT_REQUEST_HEADERS = {
 # Enable or disable spider middlewares
 # See https://doc.scrapy.org/en/latest/topics/spider-middleware.html
 # SPIDER_MIDDLEWARES = {
-#    'jianshu_paider.middlewares.JianshuPaiderSpiderMiddleware': 543,
+#    'fang.middlewares.FangSpiderMiddleware': 543,
 # }
 
 # Enable or disable downloader middlewares
 # See https://doc.scrapy.org/en/latest/topics/downloader-middleware.html
-DOWNLOADER_MIDDLEWARES = {
-    'jianshu_paider.middlewares.SeleniumDownloadMiddleware': 1,
-}
+# DOWNLOADER_MIDDLEWARES = {
+#    'fang.middlewares.FangDownloaderMiddleware': 543,
+# }
 
 # Enable or disable extensions
 # See https://doc.scrapy.org/en/latest/topics/extensions.html
@@ -65,8 +65,7 @@ DOWNLOADER_MIDDLEWARES = {
 # Configure item pipelines
 # See https://doc.scrapy.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
-    # 'jianshu_paider.pipelines.JianshuPaiderPipeline': 300,
-    'jianshu_paider.pipelines.jianshuTwistedPipeline': 300,
+   'fang.pipelines.FangPipeline': 300,
 }
 
 # Enable and configure the AutoThrottle extension (disabled by default)

@@ -7,36 +7,37 @@
 import pymysql
 
 
-class JianshuPaiderPipeline(object):
-    def __init__(self):
-        dbparams = {
-            'host': '172.30.34.155',
-            'port': 3306,
-            'user': 'root',
-            'password': '123456',
-            'database': 'jianshu_dev',
-            'charset': 'utf8'
-        }
-        self.conn = pymysql.connect(**dbparams)
-        self.cursor = self.conn.cursor()
-        self._sql = None
-
-    def process_item(self, item, spider):
-        self.cursor.execute(self.sql, (
-            item['title'], item['content'], item['author'], item['avatar'], item['pub_time'], item['origin_url'],
-            item['article_id']
-        ))
-        self.conn.commit()
-        return item
-
-    @property
-    def sql(self):
-        if not self._sql:
-            self._sql = """
-            insert into article(id,title,content,author,avatar,pub_time,origin_url,article_id) values(null,%s,%s,%s,%s,%s,%s,%s)
-            """
-            return self._sql
-        return self._sql
+# class JianshuPaiderPipeline(object):
+#     def __init__(self):
+#         dbparams = {
+#             'host': '172.30.34.155',
+#             'port': 3306,
+#             'user': 'root',
+#             'password': '123456',
+#             'database': 'jianshu_dev',
+#             'charset': 'utf8'
+#         }
+#         self.conn = pymysql.connect(**dbparams)
+#         self.cursor = self.conn.cursor()
+#         self._sql = None
+#
+#     def process_item(self, item, spider):
+#         self.cursor.execute(self.sql, (
+#             item['title'], item['content'], item['author'], item['avatar'], item['pub_time'], item['origin_url'],
+#             item['article_id'], item['read_count'], item['like_count'], item['word_count'], item['subjects'],
+#             item['comments_count']
+#         ))
+#         self.conn.commit()
+#         return item
+#
+#     @property
+#     def sql(self):
+#         if not self._sql:
+#             self._sql = """
+#             insert into article(id,title,content,author,avatar,pub_time,origin_url,article_id,read_count,like_count,word_count,subjects,comments_count) values(null,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)
+#             """
+#             return self._sql
+#         return self._sql
 
 
 from twisted.enterprise import adbapi
@@ -61,7 +62,7 @@ class jianshuTwistedPipeline(object):
     def sql(self):
         if not self._sql:
             self._sql = """
-                insert into article(id,title,content,author,avatar,pub_time,origin_url,article_id) values(null,%s,%s,%s,%s,%s,%s,%s)
+                 insert into article(id,title,content,author,avatar,pub_time,origin_url,article_id,read_count,like_count,word_count,subjects,comments_count) values(null,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)
                 """
             return self._sql
         return self._sql
@@ -73,7 +74,8 @@ class jianshuTwistedPipeline(object):
     def insert_item(self, cursor, item):
         cursor.execute(self.sql, (
             item['title'], item['content'], item['author'], item['avatar'], item['pub_time'], item['origin_url'],
-            item['article_id']
+            item['article_id'], item['read_count'], item['like_count'], item['word_count'], item['subjects'],
+            item['comments_count']
         ))
         # self.conn.commit()
 
