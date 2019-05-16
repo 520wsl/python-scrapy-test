@@ -4,14 +4,12 @@ import re
 
 import scrapy
 from fang.items import NewHouseItem, ESFHouseItem
-from scrapy_redis.spiders import RedisSpider
 
 
-class SoufangSpider(RedisSpider):
+class SoufangSpider(scrapy.Spider):
     name = 'sfw'
     allowed_domains = ['fang.com']
-    # start_urls = ['https://www.fang.com/SoufunFamily.htm']
-    redis_key = "fang:start_url"
+    start_urls = ['https://www.fang.com/SoufunFamily.htm']
 
     def parse(self, response):
         trs = response.xpath("//div[@class='outCont']//tr")
