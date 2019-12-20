@@ -30,6 +30,12 @@ class MiniToolPipeline(object):
         pattern.pattern_fore_colour = xlwt.Style.colour_map['red']  # 设置单元格背景色为黄色
         self.style.pattern = pattern
 
+        self.style2 = xlwt.XFStyle()
+        pattern2 = xlwt.Pattern()
+        pattern2.pattern = xlwt.Pattern.SOLID_PATTERN
+        pattern2.pattern_fore_colour = xlwt.Style.colour_map['yellow']  # 设置单元格背景色为黄色
+        self.style2.pattern = pattern2
+
         for i in range(len(row)):
             self.first_sheet.write(0, i, row[i])
 
@@ -42,7 +48,7 @@ class MiniToolPipeline(object):
             elif item['status'] != 200:
                 self.first_sheet.write(self.row, j, item[job], style=self.style)
             else:
-                self.first_sheet.write(self.row, j, item[job], style=self.style)
+                self.first_sheet.write(self.row, j, item[job], style=self.style2)
 
         self.wbook.save(self.file_path)
         return item
