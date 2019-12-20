@@ -42,7 +42,7 @@ class MiniToolPipeline(object):
             elif item['status'] != 200:
                 self.first_sheet.write(self.row, j, item[job], style=self.style)
             else:
-                self.first_sheet.write(self.row, j, item[job], style=self.style)
+                self.first_sheet.write(self.row, j, item[job])
 
         self.wbook.save(self.file_path)
         return item

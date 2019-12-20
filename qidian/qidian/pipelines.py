@@ -5,13 +5,14 @@
 # Don't forget to add your pipeline to the ITEM_PIPELINES setting
 # See: https://doc.scrapy.org/en/latest/topics/item-pipeline.html
 
-from scrapy.exporters import JsonLinesItemExporter
-
+# from scrapy.exporters import JsonLinesItemExporter
+from  scrapy.exporters import XmlItemExporter
 
 class QidianPipeline(object):
     def __init__(self):
-        self.fp = open('qidian_dev.json', 'wb')
-        self.exporter = JsonLinesItemExporter(self.fp, ensure_ascii=False, encoding='utf-8')
+        self.fp = open('qidian_dev.xls', 'wb')
+        # self.exporter = JsonLinesItemExporter(self.fp, ensure_ascii=False, encoding='utf-8')
+        self.exporter = XmlItemExporter(self.fp, ensure_ascii=False, encoding='utf-8')
 
     def open_spider(self, spider):
         print('爬虫开始。。。。。。。。。。。。')
