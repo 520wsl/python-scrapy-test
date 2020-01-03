@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import re
 import time
+from urllib import parse
 from urllib.parse import urlparse, urljoin
 
 import scrapy
@@ -31,7 +32,7 @@ class CollectTotalSpider(scrapy.Spider):
         self.log(response.url)
         meta = {}
         urldict = urlparse(response.url)
-        meta['site'] = urldict.query.replace('wd=', '').strip()
+        meta['site'] = parse.unquote(urldict.query.replace('wd=', '').strip())
         try:
             meta['baidu_nums'] = ''.join(re.findall(r'\d+', response.xpath('//span[@class="nums_text"]/text()').get()))
         except:
@@ -65,7 +66,6 @@ class CollectTotalSpider(scrapy.Spider):
             meta['so_site'] = ''.join(re.findall(r'\d+', nums))
         except:
             meta['so_site'] = ''
-
         yield CollectTotalItem(
             site=meta['site'],
             baidu_nums=meta['baidu_nums'],
