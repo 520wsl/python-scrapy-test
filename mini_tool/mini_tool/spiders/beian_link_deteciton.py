@@ -6,7 +6,7 @@ from mini_tool.items import MiniToolItem
 import xlrd
 import os, sys
 
-
+#  网站备案链接检测工具
 class BeianLinkDetecitonSpider(scrapy.Spider):
     handle_httpstatus_list = [404, 403, 500, 502]
     name = 'beian_link_deteciton'

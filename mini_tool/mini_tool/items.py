@@ -20,3 +20,11 @@ class MiniToolItem(scrapy.Item):
     keywords = scrapy.Field()
     description = scrapy.Field()
     time = scrapy.Field()
+
+
+class CollectTotalItem(scrapy.Item):
+    site = scrapy.Field()
+    baidu_nums = scrapy.Field()
+    baidu_site = scrapy.Field()
+    so_nums = scrapy.Field()
+    so_site = scrapy.Field()
