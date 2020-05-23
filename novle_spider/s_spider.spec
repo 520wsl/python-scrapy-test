@@ -8,6 +8,8 @@ a = Analysis(['s_spider.py'],
              binaries=[],
              datas=[
                 ('scrapy','scrapy'),
+                ('novle_spider','novle_spider'),
+                ('scrapy.cfg','scrapy.cfg'),
              ],
              hiddenimports=[],
              hookspath=[],
