@@ -25,6 +25,9 @@ import scrapy.core.downloader
 import scrapy.core.downloader.handlers.http
 import scrapy.core.downloader.contextfactory
 import scrapy.core.downloader.handlers.ftp
+import scrapy.core.downloader.handlers.datauri
+import scrapy.core.downloader.handlers.file
+import scrapy.core.downloader.handlers.s3
 
 import scrapy.downloadermiddlewares.stats
 import scrapy.downloadermiddlewares.httpcache
@@ -54,6 +57,19 @@ import scrapy.squeues
 import queuelib
 
 
+def hello():
+    """
+    打印欢迎界面
+    """
+    print('*' * 100)
+    print('\t\t\t\tNovel Tool')
+    print('\t\t @Author : Mad Dragon')
+    print('\t\t @Email: 395548460@qq.com')
+    print('\t\t @Version: 2.0.1')
+    print('\t\t @Time: 2020年5月23日')
+    print('*' * 100)
+
+
 def biquge_spider():
     try:
         process = CrawlerProcess(get_project_settings())
@@ -73,43 +89,44 @@ def qidian_spider():
 
 
 def main():
-    print('= =' * 10 + ' 请输入小说网站ID ' + ('= =' * 10))
-    print('\t0 : 笔趣阁 ( www.biquge.lu )')
-    print('\t1 : 起点中文网 ( www.qidian.com )')
-    print('= =' * 25)
-    webid = int(input('请输入小说网站ID：'))
+    hello()
 
-    if webid == 0:
-        print('= =' * 10 + ' 0 : 笔趣阁 ( www.biquge.lu ) ' + ('= =' * 10))
+    print('\n')
+    print(' * =' * 25)
+    print('\t\t\t\t 工具列表')
+    print('\t\t ID\t:\t name')
+    print('\t\t 0\t:\t退出程序')
+    print('\t\t 1\t:\t笔趣阁 ( www.biquge.lu )')
+    print('\t\t 2\t:\t起点中文网 ( www.qidian.com )')
+    print(' * =' * 25)
+    print('\n')
+
+    print('请根据工具列表选择相对应的工具ID\n')
+    ID = input('请输入ID (例如 1):')
+
+    if ID:
+        ID = int(ID)
+    if ID == 0:
+        print('*' * 20 + ' 本次服务到此结束，欢迎下次使用。 ' + ('*' * 20))
+        input('回车关闭窗口 ==》')
+        exit()
+
+    elif ID == 1:
+        print('= = ' * 20 + ' 1:  笔趣阁 ( www.biquge.lu ) ' + ('= = ' * 20))
         print('\n')
         biquge_spider()
-    elif webid == 1:
-        print('= =' * 10 + ' 1 : 起点中文网 ( www.qidian.com ) ' + ('= =' * 10))
+        print('\n')
+        print('= = ' * 20 + ' 1:  笔趣阁 ( www.biquge.lu )' + ('= = ' * 20))
+
+    elif ID == 2:
+        print('= = ' * 20 + ' 2: 起点中文网 ( www.qidian.com ) ' + ('= = ' * 20))
         print('\n')
         qidian_spider()
+        print('\n')
+        print('= = ' * 20 + ' 2: 起点中文网 ( www.qidian.com ) ' + ('= = ' * 20))
 
-    print('= =' * 10 + ' 小说爬取完成 ' + ('= =' * 10))
-    input('回车关闭窗口 ==》')
+    main()
 
 
 if __name__ == '__main__':
     main()
-
-# process = CrawlerProcess(get_project_settings())
-#
-# print('= =' * 10 + ' 请输入小说网站ID ' + ('= =' * 10))
-# print('\t0 : 笔趣阁 ( www.biquge.lu )')
-# print('\t1 : 起点中文网 ( www.qidian.com )')
-# print('= =' * 25)
-# webid = int(input('请输入小说网站ID：'))
-#
-# if webid == 0:
-#     process.crawl('biquge')
-# elif webid == 1:
-#     process.crawl('qidian')
-#
-# print('= =' * 10 + ' 小说爬取完成 ' + ('= =' * 10))
-#
-#
-#
-# process.start()

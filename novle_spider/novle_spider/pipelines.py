@@ -9,7 +9,8 @@ import os
 
 class NovleSpiderPipeline(object):
     def __init__(self):
-        self.path = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'book_dev')
+        # self.path = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file__))), 'book_dev')
+        self.path = os.path.join('book_dev')
         if not os.path.exists(self.path):
             os.mkdir(self.path)
 
@@ -20,7 +21,7 @@ class NovleSpiderPipeline(object):
         bookId = item['bookId']
         name = item['name']
         content = item['content']
-        
+
         book_path = os.path.join(self.path, name + '_' + bookId)
         if not os.path.exists(book_path):
             os.mkdir(book_path)
