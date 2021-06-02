@@ -57,7 +57,7 @@ six==1.12.0
 SOAPpy==0.12.22
 soupsieve==1.9.1
 Twisted==19.2.0
-urllib3==1.24.2
+urllib3==1.26.5
 w3lib==1.20.0
 wstools==0.4.8
 wxpy==0.3.9.8
