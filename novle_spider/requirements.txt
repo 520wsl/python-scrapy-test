@@ -22,7 +22,7 @@ idna==2.8
 incremental==17.5.0
 itchat==1.2.32
 items==0.6.5
-lxml==4.3.3
+lxml==4.6.5
 macholib==1.11
 nulltype==2.3.1
 parsel==1.5.1
